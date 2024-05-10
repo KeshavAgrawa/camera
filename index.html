@@ -17,6 +17,7 @@
 var velocity = { x: 0, y: 0, z: 0 };
 var lastAcceleration = { x: 0, y: 0, z: 0 };
 var lastTimestamp = null;
+var motionStoppedThreshold = 0.1; // Threshold below which motion is considered stopped
 
 window.addEventListener('devicemotion', handleMotion);
 
@@ -31,6 +32,15 @@ function handleMotion(event) {
         velocity.x += acceleration.x * dt;
         velocity.y += acceleration.y * dt;
         velocity.z += acceleration.z * dt;
+        
+        // Reset velocity to zero if acceleration is close to zero
+        if (Math.abs(acceleration.x) < motionStoppedThreshold &&
+            Math.abs(acceleration.y) < motionStoppedThreshold &&
+            Math.abs(acceleration.z) < motionStoppedThreshold) {
+            velocity.x = 0;
+            velocity.y = 0;
+            velocity.z = 0;
+        }
     }
 
     lastAcceleration.x = acceleration.x;
