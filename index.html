@@ -22,7 +22,7 @@ var lastTimestamp = null;
 window.addEventListener('devicemotion', handleMotion);
 
 function handleMotion(event) {
-    var acceleration = event.accelerationIncludingGravity;
+    var acceleration = event.acceleration;
     var timestamp = event.timeStamp || Date.now(); // For some devices, event.timestamp is not available
 
     if (lastTimestamp) {
