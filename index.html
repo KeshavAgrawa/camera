@@ -15,7 +15,6 @@
 
 <script>
 var velocity = { x: 0, y: 0, z: 0 };
-var position = { x: 0, y: 0, z: 0 };
 var lastAcceleration = { x: 0, y: 0, z: 0 };
 var lastTimestamp = null;
 
@@ -28,15 +27,10 @@ function handleMotion(event) {
     if (lastTimestamp) {
         var dt = (timestamp - lastTimestamp) / 1000; // Time interval in seconds
 
-        // Integrate acceleration to obtain velocity
+        // Integrate acceleration to obtain velocity for each axis
         velocity.x += acceleration.x * dt;
         velocity.y += acceleration.y * dt;
         velocity.z += acceleration.z * dt;
-
-        // Integrate velocity to obtain position
-        position.x += velocity.x * dt;
-        position.y += velocity.y * dt;
-        position.z += velocity.z * dt;
     }
 
     lastAcceleration.x = acceleration.x;
@@ -45,14 +39,16 @@ function handleMotion(event) {
 
     lastTimestamp = timestamp;
 
-    // Calculate speed and direction
-    var speed = Math.sqrt(velocity.x ** 2 + velocity.y ** 2 + velocity.z ** 2);
-    var direction = Math.atan2(velocity.y, velocity.x);
+    // Calculate speed for each axis
+    var speedX = velocity.x;
+    var speedY = velocity.y;
+    var speedZ = velocity.z;
 
-    // Display speed and direction in the HTML element
+    // Display speed for each axis
     var motionInfoElement = document.getElementById('motionInfo');
-    motionInfoElement.innerHTML = "Speed: " + speed.toFixed(2) + " m/s<br>" +
-                                  "Direction: " + direction.toFixed(2) + " radians";
+    motionInfoElement.innerHTML = "Speed X: " + speedX.toFixed(2) + " m/s<br>" +
+                                  "Speed Y: " + speedY.toFixed(2) + " m/s<br>" +
+                                  "Speed Z: " + speedZ.toFixed(2) + " m/s";
 }
 </script>
 </body>
