@@ -17,7 +17,6 @@
 var velocity = { x: 0, y: 0, z: 0 };
 var position = { x: 0, y: 0, z: 0 };
 var lastAcceleration = { x: 0, y: 0, z: 0 };
-var lastVelocity = { x: 0, y: 0, z: 0 };
 var lastTimestamp = null;
 
 window.addEventListener('devicemotion', handleMotion);
@@ -29,23 +28,20 @@ function handleMotion(event) {
     if (lastTimestamp) {
         var dt = (timestamp - lastTimestamp) / 1000; // Time interval in seconds
 
-        // Trapezoidal rule for numerical integration
+        // Update velocity using the current and previous acceleration
         velocity.x += 0.5 * (acceleration.x + lastAcceleration.x) * dt;
         velocity.y += 0.5 * (acceleration.y + lastAcceleration.y) * dt;
         velocity.z += 0.5 * (acceleration.z + lastAcceleration.z) * dt;
 
-        position.x += 0.5 * (velocity.x + lastVelocity.x) * dt;
-        position.y += 0.5 * (velocity.y + lastVelocity.y) * dt;
-        position.z += 0.5 * (velocity.z + lastVelocity.z) * dt;
+        // Update position using the current and previous velocity
+        position.x += velocity.x * dt;
+        position.y += velocity.y * dt;
+        position.z += velocity.z * dt;
     }
 
     lastAcceleration.x = acceleration.x;
     lastAcceleration.y = acceleration.y;
     lastAcceleration.z = acceleration.z;
-
-    lastVelocity.x = velocity.x;
-    lastVelocity.y = velocity.y;
-    lastVelocity.z = velocity.z;
 
     lastTimestamp = timestamp;
 
