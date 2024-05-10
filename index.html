@@ -15,18 +15,31 @@
 
 <script>
     
+var velocity = { x: 0, y: 0, z: 0 };
+var position = { x: 0, y: 0, z: 0 };
+
 window.addEventListener('devicemotion', handleMotion);
 
 function handleMotion(event) {
-    setTimeout(()=>{
-        var acceleration = event.acceleration;
-    var accelerationInfo = "Acceleration X: " + acceleration.x.toFixed(2) + " m/s^2<br>" +
-                           "Acceleration Y: " + acceleration.y.toFixed(2) + " m/s^2<br>" +
-                           "Acceleration Z: " + acceleration.z.toFixed(2) + " m/s^2";
+    var acceleration = event.accelerationIncludingGravity;
+    var dt = event.interval / 1000; // Time interval in seconds
 
-    document.getElementById('acceleration').innerHTML = accelerationInfo;
-    },500)
-    
+    // Integrate acceleration to obtain velocity
+    velocity.x += acceleration.x * dt;
+    velocity.y += acceleration.y * dt;
+    velocity.z += acceleration.z * dt;
+
+    // Integrate velocity to obtain position
+    position.x += velocity.x * dt;
+    position.y += velocity.y * dt;
+    position.z += velocity.z * dt;
+
+    // Now you can use velocity and position to estimate speed and direction
+    var speed = Math.sqrt(velocity.x ** 2 + velocity.y ** 2 + velocity.z ** 2);
+    var direction = Math.atan2(velocity.y, velocity.x);
+
+    // Display or use speed and direction as needed
+   document.querySelector('div').innerHTML = "Speed: " + speed + " m/s <br>" + "Direction: " + direction + " radians <br>";
 }
 </script>
 </body>
