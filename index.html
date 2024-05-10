@@ -17,7 +17,7 @@
 window.addEventListener('devicemotion', handleMotion);
 
 function handleMotion(event) {
-    var acceleration = event.accelerationIncludingGravity;
+    var acceleration = event.acceleration;
     var accelerationInfo = "Acceleration X: " + acceleration.x.toFixed(2) + " m/s^2<br>" +
                            "Acceleration Y: " + acceleration.y.toFixed(2) + " m/s^2<br>" +
                            "Acceleration Z: " + acceleration.z.toFixed(2) + " m/s^2";
