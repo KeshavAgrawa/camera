@@ -1,39 +1,29 @@
 <!DOCTYPE html>
-<html lang='en'>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VR</title>
-    <style>
-      *{
-        margin:0;
-        padding:0;}
-    </style>
+<html>
+<body>
+<h1>HTML Geolocation</h1>
+<p>Click the button to get your coordinates.</p>
 
-  </head>
-  <body>
- <button>START THE FEED</button>
- <video autoplay></video>
- <canvas></canvas>
+<button onclick="getLocation()">Try It</button>
+
+<p id="demo"></p>
+
 <script>
-    var video = document.querySelector("video");
-    var canvas = document.querySelector("canvas");
-    var ctx = canvas.getContext('2d')
-  canvas.height = window.innerHeight;
-  canvas.width = window.innerWidth
-  
-  function start() {
-    navigator.webkitGetUserMedia({video:true}, gotStream, function() {}); 
-    document.querySelector('button').disabled = true;
-    }
-    function gotStream(stream) {
-    video.src = webkitURL.createObjectURL(stream);
-    }
+const x = document.getElementById("demo");
 
-    timer = setInterval(
-        function () {
-            ctx.drawImage(video, 0, 0, 320, 240);
-        }, 250);
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;
+}
 </script>
-  </body>
+
+</body>
 </html>
