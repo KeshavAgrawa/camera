@@ -28,12 +28,12 @@ function handleMotion(event) {
     if (lastTimestamp) {
         var dt = (timestamp - lastTimestamp) / 1000; // Time interval in seconds
 
-        // Update velocity using the current and previous acceleration
-        velocity.x += 0.5 * (acceleration.x + lastAcceleration.x) * dt;
-        velocity.y += 0.5 * (acceleration.y + lastAcceleration.y) * dt;
-        velocity.z += 0.5 * (acceleration.z + lastAcceleration.z) * dt;
+        // Integrate acceleration to obtain velocity
+        velocity.x += acceleration.x * dt;
+        velocity.y += acceleration.y * dt;
+        velocity.z += acceleration.z * dt;
 
-        // Update position using the current and previous velocity
+        // Integrate velocity to obtain position
         position.x += velocity.x * dt;
         position.y += velocity.y * dt;
         position.z += velocity.z * dt;
