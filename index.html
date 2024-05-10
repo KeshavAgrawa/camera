@@ -14,15 +14,19 @@
 <div id="acceleration"></div>
 
 <script>
+    
 window.addEventListener('devicemotion', handleMotion);
 
 function handleMotion(event) {
-    var acceleration = event.acceleration;
-    var accelerationInfo = "Acceleration X: " + acceleration.x.toFixed(2) + " m/s^2<br>" +
-                           "Acceleration Y: " + acceleration.y.toFixed(2) + " m/s^2<br>" +
-                           "Acceleration Z: " + acceleration.z.toFixed(2) + " m/s^2";
+    setTimeout(()=>{
+        var acceleration = event.acceleration;
+    var accelerationInfo = "Acceleration X: " + acceleration.x + " m/s^2<br>" +
+                           "Acceleration Y: " + acceleration.y + " m/s^2<br>" +
+                           "Acceleration Z: " + acceleration.z + " m/s^2";
 
     document.getElementById('acceleration').innerHTML = accelerationInfo;
+    },200)
+    
 }
 </script>
 </body>
