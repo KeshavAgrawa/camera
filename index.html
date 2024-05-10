@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Device Motion Example</title>
+<style>
+    #acceleration {
+        font-size: 24px;
+    }
+</style>
+</head>
 <body>
-<h1>HTML Geolocation</h1>
-<p>Click the button to get your coordinates.</p>
-
-<button onclick="getLocation()">Try It</button>
-
-<p id="demo"></p>
+<div id="acceleration"></div>
 
 <script>
-const x = document.getElementById("demo");
+window.addEventListener('devicemotion', handleMotion);
 
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
+function handleMotion(event) {
+    var acceleration = event.accelerationIncludingGravity;
+    var accelerationInfo = "Acceleration X: " + acceleration.x.toFixed(2) + " m/s^2<br>" +
+                           "Acceleration Y: " + acceleration.y.toFixed(2) + " m/s^2<br>" +
+                           "Acceleration Z: " + acceleration.z.toFixed(2) + " m/s^2";
 
-function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude +
-  "<br>Longitude: " + position.coords.longitude;
+    document.getElementById('acceleration').innerHTML = accelerationInfo;
 }
 </script>
-
 </body>
 </html>
