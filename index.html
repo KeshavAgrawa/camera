@@ -17,7 +17,7 @@
 var velocity = { x: 0, y: 0, z: 0 };
 var lastAcceleration = { x: 0, y: 0, z: 0 };
 var lastTimestamp = null;
-var motionStoppedThreshold = 0.1; // Threshold below which motion is considered stopped
+var motionStoppedThreshold = 0.5; // Increased threshold for motion stop detection
 
 window.addEventListener('devicemotion', handleMotion);
 
