@@ -3,184 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three.js Example</title>
-    <!-- Import Three.js library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/23.1.2/tween.umd.js" integrity="sha512-tVgTGDCgmeSNyNQn+QS+htn5AvnZc3tnER7GFo3ylfohYZKlottjyG2ryA4z2c1HV2Q7+MM3aN2A9abItyPpuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="importmap">
-        {
-          "imports": {
-            "three": "https://unpkg.com/three@v0.163.0/build/three.module.js",
-            "three/addons/": "https://unpkg.com/three@v0.163.0/examples/jsm/"
-          }
-        }
-      </script>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
-    </style>
+    <title>Document</title>
 </head>
 <body>
-    <canvas class="webXR"></canvas>
-    <script type="module" >
-import * as THREE from 'three';
-import { VRButton } from 'three/addons/webxr/VRButton.js';
-
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x505050);
-scene.add(new THREE.HemisphereLight(0x606060, 0x404040));
-
-const size = {
-  width: window.innerWidth,
-  height: window.innerHeight
-}
-
-const camera = new THREE.PerspectiveCamera(50, size.width / size.height, 0.1, 100);
-camera.position.set(0, 1.6, 0);
-scene.add(camera);
-
-const light = new THREE.DirectionalLight(0xffffff);
-light.position.set(1, 1, 1).normalize();
-scene.add(light);
-
-const canvas = document.querySelector('.webXR');
-
-const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(size.width, size.height);
-renderer.outputEncoding = THREE.sRGBEncoding;
-
-const dolly = new THREE.Object3D();
-
-dolly.add(camera);
-scene.add(dolly);
-
-const dummyCam = new THREE.Object3D();
-camera.add(dummyCam)
-
-initScene();
-setupXR();
-
-window.addEventListener('resize', resize);
-renderer.setAnimationLoop(animate);
-
-function random(min, max) {
-  return Math.random() * (max - min) + min;
-}
-
-function initScene() {
-  const radius = 0.08;
- 
-
-  const geometry = new THREE.IcosahedronGeometry(radius, 2);
-
-  for (let i = 0; i < 200; i++) {
-    const object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({
-      color: Math.random() * 0xFFFFFF
-    }));
-    object.position.x = random(-2, 2);
-    object.position.y = random(-2, 2);
-    object.position.z = random(-2, 2);
-    scene.add(object)
-  }
- 
-}
-
-function setupXR() {
-  renderer.xr.enabled = true;
-  document.body.appendChild(VRButton.createButton(renderer));
-}
-
-var velocity = { x: 0, y: 0, z: 0 };
-var lastAcceleration = { x: 0, y: 0, z: 0 };
-var lastTimestamp = null;
-var motionStoppedThreshold = 0.1; // Threshold below which motion is considered stopped
-
-
-        //developer options
-    const canvas2 = document.createElement('canvas');
-    document.body.appendChild(canvas2);
-    canvas2.style.position = 'absolute';
-    canvas2.width = 600;
-    canvas2.height = 600;
-    canvas2.style.height = "600px";
-    canvas2.style.width = "600px";
-    canvas2.style.top = "0px";
-    canvas2.style.background = "black";
-    const ctt = canvas2.getContext('2d');
-     let circlePosX = 300;
-     let circlePosY = 300;
-
-        
-window.addEventListener('devicemotion', handleMotion);
+   <script >
+    window.addEventListener('devicemotion', handleMotion);
 
 function handleMotion(event) {
     var acceleration = event.acceleration;
     var timestamp = event.timeStamp || Date.now(); // For some devices, event.timestamp is not available
+    console.log(acceleration)
 
-    if (lastTimestamp) {
-        var dt = (timestamp - lastTimestamp) / 1000; // Time interval in seconds
-
-        // Integrate acceleration to obtain velocity for each axis
-        velocity.x += acceleration.x * dt;
-        velocity.y += acceleration.y * dt;
-        velocity.z += acceleration.z * dt;
-
-        // Reset velocity to zero if acceleration is close to zero
-        
-        if (Math.abs(acceleration.x) < motionStoppedThreshold &&
-            Math.abs(acceleration.y) < motionStoppedThreshold &&
-            Math.abs(acceleration.z) < motionStoppedThreshold) {
-            velocity.x = 0;
-            velocity.y = 0;
-            velocity.z = 0;
-        }
-    }
-
-    lastAcceleration.x = acceleration.x;
-    lastAcceleration.y = acceleration.y;
-    lastAcceleration.z = acceleration.z;
-
-    lastTimestamp = timestamp;
-
-    // Calculate new position for dolly
-    var speedX = velocity.x;
-    var speedY = velocity.y;
-    var speedZ = velocity.z;
-
-    // Update dolly's position based on velocity
-    dolly.position.x += speedX * 0.02 ;
-    dolly.position.z += speedZ * 0.02 ;
-
-  
-    circlePosX += speedX * 0.3;
-    circlePosY += speedZ * 0.3;
-    
-    ctt.clearRect(0,0,600,600)
-    ctt.beginPath();
-    ctt.arc(circlePosX,circlePosY,8,0,Math.PI * 2);
-    ctt.fillStyle = "red"
-    ctt.fill();
-    
-    
     
     
 }
 
-
-function resize() {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  renderer.setSize(width, height);
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
-}
-
-function animate() {
-    TWEEN.update();
-  renderer.render(scene, camera);
-} 
-    </script>
+   </script>
 </body>
 </html>
