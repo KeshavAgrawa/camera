@@ -6,13 +6,15 @@
     <title>Document</title>
 </head>
 <body>
+    <div></div>
    <script >
     window.addEventListener('devicemotion', handleMotion);
 
 function handleMotion(event) {
     var acceleration = event.acceleration;
     var timestamp = event.timeStamp || Date.now(); // For some devices, event.timestamp is not available
-    console.log(acceleration)
+    const dabba = document.querySelector('div');
+    dabba.innerHTML = "X: " + acceleration.x + "<br>" + "y: " + acceleration.y + "<br>" + "y: " + acceleration.y + "<br>"
 
     
     
