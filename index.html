@@ -84,7 +84,6 @@ function initScene() {
     object.position.z = random(-2, 2);
     scene.add(object)
   }
-
  
 }
 
@@ -99,7 +98,20 @@ var lastTimestamp = null;
 var motionStoppedThreshold = 0.1; // Threshold below which motion is considered stopped
 
 
+        //developer options
+    const canvas2 = document.createElement('canvas');
+    document.body.appendChild("canvas2");
+    canvas2.style.position = 'absolute';
+    canvas2.width = 600;
+    canvas2.height = 600;
+    canvas2.style.height = 600px;
+    canvas2.style.width = 600px;
+    canvas2.style.top = 0px;
+    canvas2.style.background = "black";
+    const ctt = canvas2.getContext('2d');
 
+
+        
 window.addEventListener('devicemotion', handleMotion);
 
 function handleMotion(event) {
@@ -115,6 +127,7 @@ function handleMotion(event) {
         velocity.z += acceleration.z * dt;
 
         // Reset velocity to zero if acceleration is close to zero
+        
         if (Math.abs(acceleration.x) < motionStoppedThreshold &&
             Math.abs(acceleration.y) < motionStoppedThreshold &&
             Math.abs(acceleration.z) < motionStoppedThreshold) {
@@ -138,6 +151,21 @@ function handleMotion(event) {
     // Update dolly's position based on velocity
     dolly.position.x += speedX * 0.02 ;
     dolly.position.z += speedZ * 0.02 ;
+
+   let circlePosX = 0;
+    let circlePosy = 0;
+    circlePosX += speedX * 0.02;
+    circlePosY += speedZ * 0.02;
+    
+    ctt.clearRect(0,0,canvas2.width,canvas2.height)
+    ctt.beginPath();
+    ctt.arc(circlePosX,circlePosY,8,0,Math.PI * 2);
+    ctt.fillStyle = "red"
+    ctt.fill();
+    
+    
+    
+    
 }
 
 
@@ -147,18 +175,12 @@ function resize() {
   renderer.setSize(width, height);
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
-
-
 }
 
 function animate() {
     TWEEN.update();
   renderer.render(scene, camera);
-}
-
-
-
-    
+} 
     </script>
 </body>
 </html>
