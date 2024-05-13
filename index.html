@@ -109,7 +109,8 @@ var motionStoppedThreshold = 0.1; // Threshold below which motion is considered 
     canvas2.style.top = "0px";
     canvas2.style.background = "black";
     const ctt = canvas2.getContext('2d');
-
+     let circlePosX = 0;
+     let circlePosY = 0;
 
         
 window.addEventListener('devicemotion', handleMotion);
@@ -152,8 +153,7 @@ function handleMotion(event) {
     dolly.position.x += speedX * 0.02 ;
     dolly.position.z += speedZ * 0.02 ;
 
-   let circlePosX = 0;
-    let circlePosY = 0;
+  
     circlePosX += speedX * 0.02;
     circlePosY += speedZ * 0.02;
     
