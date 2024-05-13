@@ -12,9 +12,9 @@
 
 function handleMotion(event) {
     var acceleration = event.acceleration;
-    var timestamp = event.timeStamp || Date.now(); // For some devices, event.timestamp is not available
+    var timestamp = event.timeStamp 
     const dabba = document.querySelector('div');
-    dabba.innerHTML = "X: " + acceleration.x + "<br>" + "y: " + acceleration.y + "<br>" + "y: " + acceleration.y + "<br>"
+    dabba.innerHTML = "X: " + acceleration.x + "<br>" + "y: " + acceleration.y + "<br>" + "y: " + acceleration.y + "<br>" + timestamp
 
     
     
