@@ -154,10 +154,10 @@ function handleMotion(event) {
     dolly.position.z += speedZ * 0.02 ;
 
   
-    circlePosX += speedX * 0.1;
-    circlePosY += speedZ * 0.1;
+    circlePosX += speedX * 0.3;
+    circlePosY += speedZ * 0.3;
     
-    
+    ctt.clearRect(0,0,600,600)
     ctt.beginPath();
     ctt.arc(circlePosX,circlePosY,8,0,Math.PI * 2);
     ctt.fillStyle = "red"
