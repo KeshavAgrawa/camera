@@ -9,10 +9,11 @@
     <div></div>
    <script >
     window.addEventListener('devicemotion', handleMotion);
-
+let lastTime =0
 function handleMotion(event) {
     var acceleration = event.acceleration;
-    var timestamp = event.timeStamp 
+    var timestamp = event.timeStamp - lastTime;
+    lastTime += timestamp;
     const dabba = document.querySelector('div');
     dabba.innerHTML = "X: " + acceleration.x + "<br>" + "y: " + acceleration.y + "<br>" + "z: " + acceleration.z + "<br>" + timestamp;
  
