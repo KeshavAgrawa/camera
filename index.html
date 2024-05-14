@@ -14,7 +14,7 @@ function handleMotion(event) {
     var acceleration = event.acceleration;
     var timestamp = event.timeStamp 
     const dabba = document.querySelector('div');
-    dabba.innerHTML = "X: " + acceleration.x.toFixed(2) + "<br>" + "y: " + acceleration.y.toFixed(2) + "<br>" + "z: " + acceleration.z.toFixed(2) + "<br>" + timestamp;
+    dabba.innerHTML = "X: " + acceleration.x + "<br>" + "y: " + acceleration.y + "<br>" + "z: " + acceleration.z + "<br>" + timestamp;
  
     
     
