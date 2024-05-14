@@ -15,7 +15,7 @@ function handleMotion(event) {
     var timestamp = event.timeStamp - lastTime;
     lastTime += timestamp;
     const dabba = document.querySelector('div');
-    dabba.innerHTML = "X: " + acceleration.x + "<br>" + "y: " + acceleration.y + "<br>" + "z: " + acceleration.z + "<br>" + timestamp;
+    dabba.innerHTML = "X: " + acceleration.x + "<br>" + "y: " + acceleration.y + "<br>" + "z: " + acceleration.z + "<br>" + "X-speed: " + acceleration.x * timestamp + "<br>" + "y-speed: " + acceleration.y * timestamp + "<br>" + "z-speed: " + acceleration.z * timestamp + "<br>" 
  
     
     
