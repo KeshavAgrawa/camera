@@ -10,24 +10,18 @@
     <button class="start">Start</button>
 
    <script >
-   const div = document.querySelector('div');
-   const start = document.querySelector('.start');
+   window.addEventListener('devicemotion', handleMotion);
+let lastTime =0
+function handleMotion(event) {
+    var acceleration = event.acceleration;
+    var timestamp = event.timeStamp - lastTime;
+    lastTime += timestamp;
+    const dabba = document.querySelector('div');
+    dabba.innerHTML = "X: " + acceleration.x + "<br>" + "y: " + acceleration.y + "<br>" + "z: " + acceleration.z + "<br>" + "X-speed: " + acceleration.x * timestamp + "<br>" + "y-speed: " + acceleration.y * timestamp + "<br>" + "z-speed: " + acceleration.z * timestamp + "<br>" + "X-distance: " + acceleration.x * timestamp * timestamp + "<br>" + "y-distance: " + acceleration.y * timestamp * timestamp + "<br>" + "z-distance: " + acceleration.z * timestamp * timestamp + "<br>"  
 
-   start.addEventListener('click', () => {
 
-            navigator.geolocation.watchPosition(
-                data => {
-                    div.innerHTML = 'X: ' + data.coords.latitude + '<br>' + 'Y: ' + data.coords.longitude;
-                },
-                error => console.log(error),
-                {
-                    enableHighAccuracy: true,
-                    maximumAge: 100,  // Caching the position for 100 milliseconds
-                    timeout: 100      // Setting the timeout to 100 milliseconds
-                }
-            );
-        });
 
+}
 
    </script>
 </body>
