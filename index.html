@@ -14,15 +14,28 @@
    const start = document.querySelector('.start');
 
    start.addEventListener('click', () => {
-            navigator.geolocation.watchPosition(
+   let referencePOS = {x:0,y:0}
+    navigator.geolocation.getCurrentPosition(
                 data => {
-                    div.innerHTML = 'Latitude: ' + data.coords.latitude + '<br>' + 'Longitude: ' + data.coords.longitude;
+                   referencePOS.x = data.coords.latitude  
+                   referencePOS.y =  data.coords.longitude
                 },
                 error => console.log(error),
                 {
                     enableHighAccuracy: true,
-                    maximumAge: 100,  // Caching the position for 500 milliseconds
-                    timeout: 100      // Setting the timeout to 500 milliseconds
+                }
+            );
+    
+
+            navigator.geolocation.watchPosition(
+                data => {
+                    div.innerHTML = 'X: ' + (referencePOS.x - data.coords.latitude) + '<br>' + 'Y: ' +(referencePOS.y - data.coords.longitude);
+                },
+                error => console.log(error),
+                {
+                    enableHighAccuracy: true,
+                    maximumAge: 100,  // Caching the position for 100 milliseconds
+                    timeout: 100      // Setting the timeout to 100 milliseconds
                 }
             );
         });
