@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>location</title>
 </head>
 <body>
-    <div></div>
+    <div class="locate">helloo</div>
+    <button class="start">Start</button>
+
    <script >
-    window.addEventListener('devicemotion', handleMotion);
-let lastTime =0
-function handleMotion(event) {
-    var acceleration = event.acceleration;
-    var timestamp = event.timeStamp - lastTime;
-    lastTime += timestamp;
-    const dabba = document.querySelector('div');
-    dabba.innerHTML = "X: " + acceleration.x + "<br>" + "y: " + acceleration.y + "<br>" + "z: " + acceleration.z + "<br>" + "X-speed: " + acceleration.x * timestamp + "<br>" + "y-speed: " + acceleration.y * timestamp + "<br>" + "z-speed: " + acceleration.z * timestamp + "<br>" + "X-distance: " + acceleration.x * timestamp * timestamp + "<br>" + "y-distance: " + acceleration.y * timestamp * timestamp + "<br>" + "z-distance: " + acceleration.z * timestamp * timestamp + "<br>"  
- 
-    
-    
-}
+   const div = document.querySelector('div');
+   const start = document.querySelector('.start');
+
+   start.addEventListener('click', ()=>{
+    navigator.geolocation.watchPosition(
+        data =>{
+            div.innerHTML = 'latitude: ' + data.coords.latitude + '<br>' + 'longitude: ' + data.coords.longitude
+        },
+        error => console.log(error),
+        {
+            enableHighAccuracy: true
+        }
+    )
+   })
+
 
    </script>
 </body>
