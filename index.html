@@ -7,25 +7,25 @@
 </head>
 <body>
     <div class="locate">helloo</div>
-    
+    <button class="start">Start</button>
 
    <script >
    const div = document.querySelector('div');
-   
+   const start = document.querySelector('.start');
 
-   function getMe(){
-    navigator.geolocation.watchPosition(
-        data =>{
-            div.innerHTML = 'latitude: ' + data.coords.latitude + '<br>' + 'longitude: ' + data.coords.longitude
-        },
-        error => console.log(error),
-        {
-            enableHighAccuracy: true
-        }
-    )
-    };
-
-    setTimeout(getMe(),500)
+   start.addEventListener('click', () => {
+            navigator.geolocation.watchPosition(
+                data => {
+                    div.innerHTML = 'Latitude: ' + data.coords.latitude + '<br>' + 'Longitude: ' + data.coords.longitude;
+                },
+                error => console.log(error),
+                {
+                    enableHighAccuracy: true,
+                    maximumAge: 500,  // Caching the position for 500 milliseconds
+                    timeout: 500      // Setting the timeout to 500 milliseconds
+                }
+            );
+        });
 
 
    </script>
