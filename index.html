@@ -7,14 +7,14 @@
 </head>
 <body>
     <div class="locate">helloo</div>
-    <button class="start">Start</button>
+    
 
    <script >
    const div = document.querySelector('div');
-   const start = document.querySelector('.start');
+   
 
-   start.addEventListener('click', ()=>{
-    navigator.geolocation.watchPosition(
+   function getMe(){
+    navigator.geolocation.getCurrentPosition(
         data =>{
             div.innerHTML = 'latitude: ' + data.coords.latitude + '<br>' + 'longitude: ' + data.coords.longitude
         },
@@ -23,7 +23,9 @@
             enableHighAccuracy: true
         }
     )
-   })
+    };
+
+    setTimeout(getMe(),500)
 
 
    </script>
