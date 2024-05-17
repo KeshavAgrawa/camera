@@ -14,7 +14,7 @@
    
 
    function getMe(){
-    navigator.geolocation.getCurrentPosition(
+    navigator.geolocation.watchPosition(
         data =>{
             div.innerHTML = 'latitude: ' + data.coords.latitude + '<br>' + 'longitude: ' + data.coords.longitude
         },
