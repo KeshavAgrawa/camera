@@ -14,22 +14,10 @@
    const start = document.querySelector('.start');
 
    start.addEventListener('click', () => {
-   let referencePOS = {x:0,y:0}
-    navigator.geolocation.getCurrentPosition(
-                data => {
-                   referencePOS.x = data.coords.latitude  
-                   referencePOS.y =  data.coords.longitude
-                },
-                error => console.log(error),
-                {
-                    enableHighAccuracy: true,
-                }
-            );
-    
 
             navigator.geolocation.watchPosition(
                 data => {
-                    div.innerHTML = 'X: ' + (referencePOS.x - data.coords.latitude) * 111111 + '<br>' + 'Y: ' +(referencePOS.y - data.coords.longitude) * 111111;
+                    div.innerHTML = 'X: ' + data.coords.latitude + '<br>' + 'Y: ' + data.coords.longitude;
                 },
                 error => console.log(error),
                 {
