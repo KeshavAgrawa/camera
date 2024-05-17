@@ -29,7 +29,7 @@
 
             navigator.geolocation.watchPosition(
                 data => {
-                    div.innerHTML = 'X: ' + (referencePOS.x - data.coords.latitude) + '<br>' + 'Y: ' +(referencePOS.y - data.coords.longitude);
+                    div.innerHTML = 'X: ' + (referencePOS.x - data.coords.latitude) * 10000 + '<br>' + 'Y: ' +(referencePOS.y - data.coords.longitude) * 10000;
                 },
                 error => console.log(error),
                 {
